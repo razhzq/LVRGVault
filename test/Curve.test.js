@@ -15,7 +15,7 @@ describe("Vault Contract", function () {
 
         const [deployer, addr1, addr2] = await ethers.getSigners();
 
-        const DAI = await mockDAI.deploy(deployer, addr1, addr2);
+        const DAI = await mockDAI.deploy(deployer, addr1, addr2);      
         await DAI.deployed();
 
         const Vault = await VaultInit.deploy(500000, DAI.address);    // params?

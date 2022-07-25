@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "./curves/BancorFormula.sol";
 
 
-contract ContinousToken is BancorFormula, ERC20, DSMath {
+contract ContinousToken is BancorFormula, ERC20, {
     using SafeMath for uint256;
 
     uint256 public scale = 10**18;
