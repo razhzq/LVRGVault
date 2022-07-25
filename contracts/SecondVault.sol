@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "./curves/BancorFormula.sol";
-import "./utils/Math.sol";
+
 
 contract ContinousToken is BancorFormula, ERC20, DSMath {
     using SafeMath for uint256;
@@ -47,14 +47,16 @@ contract ContinousToken is BancorFormula, ERC20, DSMath {
      * @dev Mint some LVRJ token by allowing contract to spend an amount of caller reserve tokens
      * @param _amount Number of reserve token approved for this contract to convert to LVRJ tokens
      */
-    function mint(uint256 _amount) public returns (uint256 _amountMinted) {
+
+ 
+    function mint(uint256 _amount) public returns (uint256 _amountMinted) {    // payable?
         uint256 allowance = IERC20(reserveTokenAddress).allowance(
             msg.sender,
             address(this)
         );
 
         require(allowance > 0, "Must approve DAI to buy tokens.");
-        require(allowance >= _amount, "Must approve enough DAI.");
+        require(allowance >= _amount, "Must approve enough DAI.");      // msg.value
 
         bool success = IERC20(reserveTokenAddress).transferFrom(
             msg.sender,
