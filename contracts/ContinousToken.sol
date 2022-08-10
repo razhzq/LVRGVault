@@ -58,11 +58,11 @@ contract ContinousToken is BancorFormula, ERC20 {
         bool success = IERC20(reserveTokenAddress).transferFrom(
             msg.sender,
             address(this),
-            allowance
+            _amount
         );
 
         if (success) {
-            return _continuousMint(allowance);
+            return _continuousMint(_amount);
         } else {
             require(allowance > 0, "Failed to transfer Dai tokens");
         }
